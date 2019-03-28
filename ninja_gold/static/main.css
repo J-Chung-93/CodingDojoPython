@@ -1,0 +1,20 @@
+form{
+    display: inline-block;
+    border: 2px solid black;
+}
+
+li{
+    list-style-type: none;
+}
+
+.red{
+    color: red;
+}
+
+.green{
+    color: green;
+}
+
+.endOn{
+    display: none;
+}
