@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wishes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome, {% for one_user in user %} {{one_user.first_name}} {% endfor %}</h1>
+        <a href="/logout">Logout</a>
+        <!-- <a href="/wishes/stats">View Stats</a> -->
+        <a href="/wishes/new">Make a Wish!</a>
+    </div>
+    <div class="wishes">
+        <h2>Your Wish List:</h2>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <table class="table-striped table-bordered">
+            <tr>
+                <th>Item</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+            {% for one_item in all_wishes %}
+                {% if one_item['granted'] == 0 %}
+                <tr>
+                    <td>{{one_item['wish']}}</td>
+                    <td>{{one_item['created_at']}}</td>
+                    <td>
+                        <a href="/wishes/{{one_item['id']}}/granted">Granted</a><span>|</span><a href="/wishes/{{one_item['id']}}/edit">Edit</a><span>|</span><a href="/wishes/{{one_item['id']}}/destroy">Remove</a> </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </table>
+    </div>
+    <div class="granted">
+        <h2>Granted Wishes:</h2>
+        <table class="table-striped table-bordered">
+            <tr>
+                <th>Item</th>
+                <th>Wisher</th>
+                <th>Date Added</th>
+                <th>Date Granted</th>
+            </tr>
+                {% for one_item in all_users %}
+                    {% if one_item['granted'] == 1 %}
+                    <tr>
+                        <td>{{one_item['wish']}}</td>
+                        <td>{{one_item['wisher']}}</td>
+                        <td>{{one_item['created_at']}}</td>
+                        <td>{{one_item['updated_at']}}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+    </div>
+</body>
+</html>

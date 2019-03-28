@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login/Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <div class="registration">
+        <h1>Registration</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/home/register" method="POST">
+            <p>First Name:</p>
+            <input type="text" name="fname">
+            <p>Last Name:</p>
+            <input type="text" name="lname">
+            <p>Email:</p>
+            <input type="text" name="user_email">
+            <p>Password:</p>
+            <input type="password" name="pw">
+            <p>Confirm Password:</p>
+            <input type="password" name="confirm_pw">
+            <input type="submit" value="Register">
+        </form>
+    </div>
+    <div class="login">
+        <h1>Login</h1>
+        <form action="/home/login" method="POST">
+            <p>Email:</p>
+            <input type="text" name="user_email">
+            <p>Password:</p>
+            <input type="password" name="pw">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>
