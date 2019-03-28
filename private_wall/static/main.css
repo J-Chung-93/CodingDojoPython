@@ -1,0 +1,31 @@
+.header{
+    margin-bottom: 30px;
+}
+
+.header h1{
+    display: inline-block;
+    margin-right: 600px;
+}
+
+.header h2{
+    display: inline-block;
+}
+
+.received{
+    display: inline-block;
+    margin-right: 600px;
+    vertical-align: top;
+}
+
+.sent{
+    display: inline-block;
+}
+
+p{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+#delete_link{
+    color: red;
+}
